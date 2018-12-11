@@ -3,6 +3,7 @@ package com.pasha.figureRecognition.logic;
 import com.pasha.figureRecognition.util.ImageUtils;
 
 import java.io.File;
+import java.util.Objects;
 
 public class TrainingSampleFromImageProvider implements TrainingSampleProvider {
 
@@ -16,14 +17,19 @@ public class TrainingSampleFromImageProvider implements TrainingSampleProvider {
     public Double[][] provide() {
         File folderWithImages = new File(pathToFolderWithImages);
         File[] files = folderWithImages.listFiles();
-        Double[][] result = new Double[files.length][];
+
+        if (!folderWithImages.isDirectory()) {
+            throw new IllegalArgumentException("Not directory!");
+        }
+
+        Double[][] result = new Double[Objects.requireNonNull(files).length][];
         for (int fileIndex = 0; fileIndex < files.length; ++fileIndex) {
             Double[][] pixels = ImageUtils.convertBlackAndWhiteImageToArray(files[fileIndex].getAbsolutePath());
             result[fileIndex] = new Double[pixels.length * pixels[0].length];
             int i = 0;
-            for (int x = 0; x < pixels.length; x++) {
+            for (Double[] row : pixels) {
                 for (int y = 0; y < pixels[0].length; y++) {
-                    result[fileIndex][i] = pixels[x][y];
+                    result[fileIndex][i] = row[y];
                     ++i;
                 }
             }

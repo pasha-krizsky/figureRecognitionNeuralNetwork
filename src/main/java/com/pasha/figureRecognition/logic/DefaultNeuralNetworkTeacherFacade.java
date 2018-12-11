@@ -5,10 +5,10 @@ import com.pasha.figureRecognition.logic.function.SigmoidalActivationFunction;
 import com.pasha.figureRecognition.model.NeuralNetwork;
 
 public class DefaultNeuralNetworkTeacherFacade implements NeuralNetworkTeacherFacade {
-    private static final String PATH_TO_IMAGES = "D:\\projects\\java\\figureRecognition\\src\\main\\resources\\samples";
+    private static final String PATH_TO_IMAGES = "D:\\projects\\java\\figureRecognition\\src\\main\\resources\\all_samples";
 
     private static final double LEARNING_RATE = 0.1;
-    private static final int NUMBER_OF_EPOCHS = 10_000;
+    private static final int NUMBER_OF_EPOCHS = 100_000;
 
     private static final int NUM_NEURONS_IN_INPUT_LAYER = 49;
     private static final int NUM_NEURONS_IN_HIDDEN_LAYER = 3;
@@ -29,16 +29,19 @@ public class DefaultNeuralNetworkTeacherFacade implements NeuralNetworkTeacherFa
         trainingSampleProvider = new TrainingSampleFromImageProvider(PATH_TO_IMAGES);
 
         // set the outputs in the correct order!
+        Double[] circleOutput = {1D, 0D, 0D};
+        Double[] squareOutput = {0D, 1D, 0D};
+        Double[] triangleOutput = {0D, 0D, 1D};
         expectedOutputs = new Double[][]{
                 // circle
-                {1D, 0D, 0D},
-                {1D, 0D, 0D},
+                circleOutput, circleOutput, circleOutput, circleOutput, circleOutput,
+                circleOutput, circleOutput, circleOutput, circleOutput, circleOutput, circleOutput,
                 // square
-                {0D, 1D, 0D},
-                {0D, 1D, 0D},
+                squareOutput, squareOutput, squareOutput, squareOutput, squareOutput,
+                squareOutput, squareOutput, squareOutput, squareOutput, squareOutput, squareOutput,
                 // triangle
-                {0D, 0D, 1D},
-                {0D, 0D, 1D}
+                triangleOutput, triangleOutput, triangleOutput, triangleOutput, triangleOutput,
+                triangleOutput, triangleOutput, triangleOutput, triangleOutput, triangleOutput, triangleOutput
         };
 
         neuralNetwork = buildEmptyNeuralNetwork();
@@ -60,11 +63,21 @@ public class DefaultNeuralNetworkTeacherFacade implements NeuralNetworkTeacherFa
             }
             neuralNetworkErrorAfterCalculation = error / inputs.length;
         }
-        System.out.println(neuralNetwork.getWeights());
     }
 
+    @Override
     public double getNeuralNetworkErrorAfterTraining() {
         return neuralNetworkErrorAfterCalculation;
+    }
+
+    @Override
+    public NeuralNetwork getNeuralNetwork() {
+        return neuralNetwork;
+    }
+
+    @Override
+    public NeuralNetworkTeacher getNeuralNetworkTeacher() {
+        return networkTeacher;
     }
 
     private NeuralNetwork buildEmptyNeuralNetwork() {

@@ -3,15 +3,13 @@ package com.pasha.figureRecognition.logic;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class TrainingSampleFromImageProviderTest {
 
     private TrainingSampleProvider provider;
 
     @Before
     public void setUp() {
-        provider = new TrainingSampleFromImageProvider("D:\\projects\\java\\figureRecognition\\src\\main\\resources\\samples");
+        provider = new TrainingSampleFromImageProvider("D:\\projects\\java\\figureRecognition\\src\\main\\resources\\all_samples");
     }
 
     @Test

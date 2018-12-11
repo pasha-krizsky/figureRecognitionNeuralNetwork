@@ -83,6 +83,7 @@ public class DefaultNetworkTeacher implements NeuralNetworkTeacher {
         for (int layerIndex = neuralNetwork.getLayers().size() - 1; layerIndex > 0; --layerIndex) {
             Layer currentLayer = neuralNetwork.getLayers().get(layerIndex);
             Layer previousLayer = neuralNetwork.getLayers().get(layerIndex - 1);
+
             correctWeightsForPreviousLayer(currentLayer, previousLayer);
             calculateDeltasForPreviousLayer(currentLayer, previousLayer);
         }
