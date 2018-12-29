@@ -8,10 +8,10 @@ public class DefaultNeuralNetworkTeacherFacade implements NeuralNetworkTeacherFa
     private static final String PATH_TO_IMAGES = "D:\\projects\\java\\figureRecognition\\src\\main\\resources\\all_samples";
 
     private static final double LEARNING_RATE = 0.1;
-    private static final int NUMBER_OF_EPOCHS = 100_000;
+    private static final int NUMBER_OF_EPOCHS = 10_000;
 
     private static final int NUM_NEURONS_IN_INPUT_LAYER = 49;
-    private static final int NUM_NEURONS_IN_HIDDEN_LAYER = 3;
+    private static final int NUM_NEURONS_IN_HIDDEN_LAYER = 4;
     private static final int NUM_NEURONS_IN_OUTPUT_LAYER = 3;
     private static final int NUM_HIDDEN_LAYERS = 1;
 

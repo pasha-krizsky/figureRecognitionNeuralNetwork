@@ -26,7 +26,10 @@ public class DefaultNeuralNetworkTeacherFacadeTest {
 
         NeuralNetworkTeacher neuralNetworkTeacher = networkTeacherFacade.getNeuralNetworkTeacher();
         neuralNetworkTeacher.setInputs(getInputsForCircle()[0]);
+        long startForwardTime = System.currentTimeMillis();
         neuralNetworkTeacher.forward();
+        long endForwardTime = System.currentTimeMillis();
+        System.out.println("Time of forward: " + (endForwardTime - startForwardTime));
         System.out.println("Outputs for circle: ");
         for (Double output : neuralNetwork.getOutputs()) {
             System.out.print(output + " ");
